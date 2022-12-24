@@ -25,17 +25,17 @@ npm install express
 ```
 
 ## Running Program 
-to run the program two terminal is required (one to run node server and the other for running the frontend angular) 
+if the server running websocket is in the same device as the angular app then we need two terminal to run the program (one to run node server and the other for running the frontend angular) 
 
 1. Running Node to start the server
-make sure the directory is on ../olmap/server 
+make sure the directory is on ../server 
 ```bash
 node server.js
 ```
-**Note: this is done if the server running websocket is in the same device as the angular app
+**Note: this is done if the server running websocket is in the same device as the angular app, skip this if the server is already running on other device
 
 2. Running Angular 
-make sure the directory is on ../olmap
+make sure the directory is on ../
 ```bash
 ng serve
 ```
