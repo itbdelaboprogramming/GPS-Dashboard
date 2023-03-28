@@ -22,6 +22,7 @@ export class WebsocketService {
 // Function to listen to an event
    listen(eventName: string) {
     this.socket = io("http://192.168.18.17:3000")
+    // this.socket = io("http://localhost:3000")
     this.socket.on("hello", (arg:any) => {
     console.log(arg); // world
     // console.log(-6.5360378062373)

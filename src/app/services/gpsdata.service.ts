@@ -22,7 +22,7 @@ export class GpsdataService {
       this.long=this.parsedData.longitude
       this.lat=this.parsedData.latitude
       this.head=this.parsedData.heading
-      this.satelite=this.parsedData.satelite
+      // this.satelite=this.parsedData.satelite
       // console.log(this.lat)
       // console.log(this.long)
 
@@ -37,7 +37,7 @@ export class GpsdataService {
 
   // Function to get number of satelite
   sateliteCount(){
-    
+
     console.log(this.satelite)
 
     return(this.satelite)
