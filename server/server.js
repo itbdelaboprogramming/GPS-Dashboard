@@ -46,6 +46,11 @@ io.on("connection", (socket) => {
     // socket.on("init",(data) => {
     //   console.log(data)
     // })
+    //   io.emit("test",
+    //   {
+    //     "latitude": -6.889398833333333,
+    //     "longitude": 107.609208
+    // })
 
     // Listen to gps data at "gps" event from raspberry pi client
     socket.on("gps", (data) => {

@@ -18,6 +18,7 @@ import { Title } from '@angular/platform-browser';
 import { WebsocketService } from '../services/websocket.service';
 import { GpsdataService } from '../services/gpsdata.service';
 
+
 @Component ({
   selector: 'app-map',
   templateUrl: './map-component.html',
@@ -26,27 +27,55 @@ import { GpsdataService } from '../services/gpsdata.service';
 export class MapComponent implements OnInit {
   public map: Map | undefined;
   public satelitecnt:any
+  public hdop:any
+  public longi:any
+  public lati:any
+  public temploc=[0,0]
 
-  constructor(private webSoc:WebsocketService, private gpsData:GpsdataService
+  constructor(private webSoc:WebsocketService, public gpsData:GpsdataService
     ) {
       // Start Socket IO connection and receive data
       this.gpsData.Init()
+
 
     }
 
   async ngOnInit() {
 
-
+    this.addcount()
     // Start map initiation function and pass gps data
-    this.initmap(this.gpsData);
-    this.satelitecnt=this.gpsData.sateliteCount()
+    setTimeout(()=>{
+
+
+    this.longi=this.gpsData.long
+    this.lati=this.gpsData.lat
+    console.log("longitude again : "+this.longi)
+    console.log("latitude again : "+this.lati)
+    // this.temploc=[this.gpsData.longi,this.gpsData.lati]
+    this.initmap(this.gpsData,this.longi,this.lati)
+
+    // this.satelitecnt=this.gpsData.sateliteCount()
+
+
+    },500)
+
+
 
 
   }
 
+  addcount() {
+    this.satelitecnt=this.gpsData.sateliteCount()
+    this.hdop=this.gpsData.gethdop()
+    console.log("satelite :"+this.satelitecnt)
+    console.log("hdop :"+this.hdop)
+  }
+
   // Function to initiate gps data visualization in map
-  initmap(gpsdataservice:any) {
+  initmap(gpsdataservice:any,lon:any,lat:any) {
     console.log("calling initmap");
+
+
 
     // Create a new feature for gps icon
     var gpsFeature = new Feature({
@@ -86,8 +115,8 @@ export class MapComponent implements OnInit {
         //MapLayer
       ],
       view: new View({
-        center:fromLonLat([gpsdataservice.coordinate()]),
-        zoom: 10,
+        center:fromLonLat([lon,lat]),
+        zoom: 20,
         enableRotation: false
       })
 
@@ -109,7 +138,7 @@ export class MapComponent implements OnInit {
           src: 'assets/arrow.svg',
           imgSize: [600, 600],
           scale: 0.1,
-          rotation: gpsdataservice.heading()
+          rotation: -gpsdataservice.heading()*Math.PI/180 - 45.5
         }))
       }));
       gpsSource.addFeature(temp_gpsFeature)
