@@ -13,6 +13,11 @@
 
 
 <body>
+  <div class="ip-input">
+    <p>Enter robot ip address</p>
+    <input [(ngModel)]="webSoc.ipAdd">
+    <button (click)="initgps()">ENTER</button>
+  </div>
   <div class="additional">
     Satelite : {{satelitecnt}}
     HDOP : {{hdop}}

@@ -31,17 +31,24 @@ export class MapComponent implements OnInit {
   public longi:any
   public lati:any
   public temploc=[0,0]
+  public ipAdd:any
 
-  constructor(private webSoc:WebsocketService, public gpsData:GpsdataService
+  constructor(public webSoc:WebsocketService, public gpsData:GpsdataService
     ) {
-      // Start Socket IO connection and receive data
-      this.gpsData.Init()
+
 
 
     }
 
   async ngOnInit() {
 
+
+  }
+
+  initgps(){
+      // Start Socket IO connection and receive data
+      this.gpsData.Init()
+      
     this.addcount()
     // Start map initiation function and pass gps data
     setTimeout(()=>{
@@ -58,9 +65,6 @@ export class MapComponent implements OnInit {
 
 
     },500)
-
-
-
 
   }
 

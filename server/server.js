@@ -52,14 +52,23 @@ io.on("connection", (socket) => {
     //     "longitude": 107.609208
     // })
 
-    // Listen to gps data at "gps" event from raspberry pi client
-    socket.on("gps", (data) => {
+    // Listen to location data at "location" event from raspberry pi client
+    socket.on("location", (data) => {
         console.log(data)
 
-         // Send received gps data in "gps-next" event in order to be received by angular app client
-        io.emit("gps-next",data)
+         // Send received location data in "location-next" event in order to be received by angular app client
+        io.emit("location-next",data)
 
       });
+
+        // Listen to heading data at "heading" event from raspberry pi client
+        socket.on("heading", (data) => {
+          console.log(data)
+
+           // Send received heading data in "heading-next" event in order to be received by angular app client
+          io.emit("heading-next",data)
+
+        });
 
 
   });

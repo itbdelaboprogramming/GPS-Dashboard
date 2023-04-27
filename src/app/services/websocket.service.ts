@@ -13,6 +13,7 @@ export class WebsocketService {
   public socket:any;
   public webSocket:any;
   public gpsdata:any;
+  public ipAdd:any
 
   constructor() {
 
@@ -22,7 +23,7 @@ export class WebsocketService {
 // Function to listen to an event
    listen(eventName: string) {
     // this.socket = io("http://192.168.70.190:3000")
-    this.socket = io("http://localhost:3000")
+    this.socket = io("http://"+this.ipAdd+":3000")
     this.socket.on("hello", (arg:any) => {
     // console.log(arg); // world
     // console.log(-6.5360378062373)
