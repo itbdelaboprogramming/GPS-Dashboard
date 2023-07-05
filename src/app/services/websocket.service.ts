@@ -19,11 +19,15 @@ export class WebsocketService {
 
    }
 
+   conn(){
+    this.socket = io("http://localhost:3000")
+    console.log("connected to server")
+   }
+
 
 // Function to listen to an event
    listen(eventName: string) {
-    // this.socket = io("http://192.168.70.190:3000")
-    this.socket = io("http://"+this.ipAdd+":3000")
+    // this.socket = io("http://"+this.ipAdd)
     this.socket.on("hello", (arg:any) => {
     // console.log(arg); // world
     // console.log(-6.5360378062373)

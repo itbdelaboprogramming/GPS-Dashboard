@@ -26,6 +26,8 @@ const server = app.listen(port, () => {
     console.log("App now running on port", ports);
 });
 
+var carlist = [];
+var uniquelist = [];
 // Setup Socket IO and CORS handler
 const io = require('socket.io')(server, {
     cors: {
@@ -36,37 +38,67 @@ const io = require('socket.io')(server, {
     },
 });
 
+function uniqueElm(array) {
+  return array.filter(function(value, index, self) {
+    return self.indexOf(value) === index;
+  });
+}
+
+
 // Make an event connection when client connected
 io.on("connection", (socket) => {
 
+    // socket.on('room',(data) => {
+    //   console.log(data)
+    //   room_ = data
+    //   if(!(room_ in robotlist)){
+    //     robotlist.push(room_)
+    //     robotlist.sort()
+    //     socket.emit('robot-list',robotlist)
+    //   }
+
+    //   socket.room = room_
+    //   socket.join(room_)
+    // })
+
+    // socket.emit('robot-list',robotlist)
     // Send a message to the client at "hello" event
     socket.emit("hello","world");
 
-    //  // Listen to a message at "init" event from client
-    // socket.on("init",(data) => {
-    //   console.log(data)
-    // })
-    //   io.emit("test",
-    //   {
-    //     "latitude": -6.889398833333333,
-    //     "longitude": 107.609208
-    // })
-
     // Listen to location data at "location" event from raspberry pi client
-    socket.on("location", (data) => {
-        console.log(data)
+    socket.on("gps", (data) => {
+       payload = JSON.parse(data)
+       console.log("car id : "+ payload.id)
+       carlist.push(payload.id)
+       carlist.sort()
+      //   console.log(carlist)
+      //  if(!(payload.id in carlist)){
+      //   carlist.push(payload.id)
+      //   carlist.sort()
+      //   console.log(carlist)
+      //   console.log("new car assigned")
+      //  }
+
+      console.log(payload)
+      uniquelist = carlist.filter((x,i,a)=>a.indexOf(x)==i)
+      console.log(uniquelist)
+      // console.log(payload.id in carlist)
+      io.emit("vehicle-list",uniquelist)
+        // socket.room = payload.room
 
          // Send received location data in "location-next" event in order to be received by angular app client
-        io.emit("location-next",data)
+      io.emit("gps-then",payload)
 
       });
 
         // Listen to heading data at "heading" event from raspberry pi client
         socket.on("heading", (data) => {
-          console.log(data)
+          payload = JSON.parse(data)
+          console.log(payload)
+          socket.room = payload.room
 
            // Send received heading data in "heading-next" event in order to be received by angular app client
-          io.emit("heading-next",data)
+          io.in(payload.room).emit("heading1",payload)
 
         });
 

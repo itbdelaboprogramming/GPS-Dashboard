@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MapComponent } from './map/map-component';
 import { TestComponent } from './test/test.component';
+import { HeaderComponent } from './header/header.component';
 
 
 
@@ -13,7 +14,8 @@ import { TestComponent } from './test/test.component';
   declarations: [
     AppComponent,
     MapComponent,
-    TestComponent
+    TestComponent,
+    HeaderComponent
   ],
   imports: [
     BrowserModule,

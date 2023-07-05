@@ -48,7 +48,7 @@ export class MapComponent implements OnInit {
   initgps(){
       // Start Socket IO connection and receive data
       this.gpsData.Init()
-      
+
     this.addcount()
     // Start map initiation function and pass gps data
     setTimeout(()=>{
