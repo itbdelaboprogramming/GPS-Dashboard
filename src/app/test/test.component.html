@@ -31,6 +31,7 @@
         <th><p>Latitude</p></th>
         <th><p>Longitude</p></th>
         <th><p>Status</p></th>
+        <th><p>Focus</p></th>
         <th><p>View</p></th>
       </tr>
 
@@ -41,6 +42,7 @@
         <td><p>{{payarr[i].latitude}}</p></td>
         <td><p>{{payarr[i].longitude}}</p></td>
         <td><p>{{payarr[i].status}}</p></td>
+        <td><i style="cursor: pointer; color: #0567A6;" class="fas fa-search-plus" (click)="newZoom(payarr[i].longitude,payarr[i].latitude)"></i></td>
         <td><input (click)="iconVisible()" type="checkbox" id="check{{vehc}}" checked></td>
       </tr>
       <tr>
@@ -49,6 +51,7 @@
         <td><p>{{gpsDat.location2.latitude}}</p></td>
         <td><p>{{gpsDat.location2.longitude}}</p></td>
         <td><p>Working</p></td>
+        <td><p>Focus</p></td>
         <td><input type="checkbox"></td>
       </tr>
       <tr>
@@ -57,6 +60,7 @@
         <td><p>{{gpsDat.location2.latitude}}</p></td>
         <td><p>{{gpsDat.location2.longitude}}</p></td>
         <td><p>Working</p></td>
+        <td><p>Focus</p></td>
         <td><input type="checkbox"></td>
       </tr>
       <tr>
@@ -65,6 +69,7 @@
         <td><p>{{gpsDat.location2.latitude}}</p></td>
         <td><p>{{gpsDat.location2.longitude}}</p></td>
         <td><p>Working</p></td>
+        <td><p>Focus</p></td>
         <td><input type="checkbox"></td>
       </tr>
       <tr>
@@ -73,6 +78,7 @@
         <td><p>{{gpsDat.location2.latitude}}</p></td>
         <td><p>{{gpsDat.location2.longitude}}</p></td>
         <td><p>Working</p></td>
+        <td><p>Focus</p></td>
         <td><input type="checkbox"></td>
       </tr>
       <tr>
@@ -81,6 +87,7 @@
         <td><p>{{gpsDat.location2.latitude}}</p></td>
         <td><p>{{gpsDat.location2.longitude}}</p></td>
         <td><p>Working</p></td>
+        <td><p>Focus</p></td>
         <td><input type="checkbox"></td>
       </tr>
     </table>

@@ -235,6 +235,16 @@ setTimeout(()=>{
 
 
   }
+  newZoom(lon:any,lat:any){
+    if(this.map){
+      this.map.setView(new View({
+        center:fromLonLat([lon,lat]),
+        zoom: 20,
+        enableRotation: false
+      }))
+    }
+
+  }
 
   layerdev(length:any){
 
@@ -286,7 +296,7 @@ setTimeout(()=>{
     ],
     view: new View({
       center:fromLonLat([106.920671,-6.167175]),
-      zoom: 20,
+      zoom: 1,
       enableRotation: false
     })
 
