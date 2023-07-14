@@ -20,7 +20,8 @@ export class WebsocketService {
    }
 
    conn(){
-    this.socket = io("http://localhost:3000")
+    var ip = localStorage.getItem("ip")
+    this.socket = io("http://"+ip)
     console.log("connected to server")
    }
 

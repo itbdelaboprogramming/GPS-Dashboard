@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { MapComponent } from './map/map-component';
 import { TestComponent } from './test/test.component';
 import { HeaderComponent } from './header/header.component';
+import { IpInsertComponent } from './ip-insert/ip-insert.component';
 
 
 
@@ -15,7 +16,8 @@ import { HeaderComponent } from './header/header.component';
     AppComponent,
     MapComponent,
     TestComponent,
-    HeaderComponent
+    HeaderComponent,
+    IpInsertComponent
   ],
   imports: [
     BrowserModule,
