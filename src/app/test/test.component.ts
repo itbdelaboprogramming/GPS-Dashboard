@@ -15,6 +15,8 @@ import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
 import VectorSource from 'ol/source/Vector';
 import {Icon,Style} from 'ol/style';
 import Zoom from 'ol/control/Zoom.js';
+import html2canvas from 'html2canvas';
+import { Location } from '@angular/common';
 
 import { Title } from '@angular/platform-browser';
 import { GpsdataService } from '../services/gpsdata.service';
@@ -44,13 +46,11 @@ export class TestComponent implements OnInit {
 
 
 
-  constructor(public webSoc:WebsocketService, public gpsDat:GpsdataService) { }
+  constructor(public webSoc:WebsocketService, public gpsDat:GpsdataService, private location:Location) { }
 
   ngOnInit() {
     this.webSoc.conn()
     this.gpsDat.Init()
-    // this.roomi("robot1")
-    // this.roomi("robot2")
     this.webSoc.listen("vehicle-list").subscribe((data:any)=>{
 
       this.vehicleList = data
@@ -59,16 +59,19 @@ export class TestComponent implements OnInit {
       console.log("dari initLength : "+this.initLength)
 
 
-      if((this.newLength!=this.initLength)&&((this.initLength!=0))){
-       this.layerdev(this.newLength)
-       this.tableColor(this.newLength)
+      if((this.newLength!=this.initLength)&&(this.initLength!=0)){
+      //  this.layerdev(this.newLength)
+      //  this.tableColor(this.newLength)
+      //  this.initLength = this.newLength
+          this.refreshPage()
       }
       if(this.initLength==0){
         this.layerdev(this.newLength)
         this.tableColor(this.newLength)
+        this.initLength = this.newLength
       }
 
-      this.initLength = this.newLength
+      // this.initLength = this.newLength
 
   })
 
@@ -114,11 +117,6 @@ setTimeout(()=>{
 }
 },2000)
 
-
-    // this.multmap(this.webSoc,this.gpsDat)
-//
-
-
   }
 
   iconVisible(){
@@ -131,6 +129,51 @@ setTimeout(()=>{
         this.robotarrn[i].setVisible(false)
       }
     }
+  }
+  refreshPage() {
+    this.location.go(this.location.path()); // Navigates to the current route
+    window.location.reload(); // Reloads the page
+  }
+
+  deletevehc(id:any){
+    this.webSoc.emit("dellist",id)
+  }
+
+  getdisDate(){
+    var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+    var dt = new Date();
+    var curmonth = months[dt.getMonth()]
+    var curdate = dt.getDate()
+    var textdate = curdate.toString()
+    var curyear = dt.getFullYear()
+    var textyear = curyear.toString()
+
+    return(textdate+" "+curmonth+" "+textyear)
+  }
+
+  getdisTime() {
+    var now = new Date();
+    var hours = now.getHours();
+    var minutes = now.getMinutes();
+
+    // Formatting the hours and minutes to have leading zeros if needed
+    var formattedHours = (hours < 10) ? "0" + hours : hours;
+    var formattedMinutes = (minutes < 10) ? "0" + minutes : minutes;
+
+
+    return (formattedHours +"-"+ formattedMinutes)
+
+  }
+
+  captureScreenshot() {
+    const element = document.getElementById('wholeapp') as HTMLInputElement; // Replace 'elementId' with the ID of the element you want to capture
+    html2canvas(element).then((canvas) => {
+      const screenshotData = canvas.toDataURL(); // Convert the canvas image to base64 data URL
+      const link = document.createElement('a');
+      link.href = screenshotData;
+      link.download = this.getdisTime()+"_"+this.getdisDate(); // Set the desired filename for the downloaded screenshot
+      link.click();
+    });
   }
 
   parseinteg(int:any){
@@ -151,17 +194,7 @@ setTimeout(()=>{
   iconColor(i:any){
     var foricon:any
     var inum = parseInt(i)
-    // switch(i){
-    //   case "1":
-    //     foricon = this.rgbToHex(51,222,45)
-    //   break;
-    //   case "2":
-    //     foricon = this.rgbToHex(14,145,232)
-    //   break;
-    //   case "3":
-    //     foricon = this.rgbToHex(222,45,107)
-    //   break;
-    // }
+
     if(inum<8 && inum%2==1){
       foricon = this.rgbToHex(230-inum*30,50,230)
     }
@@ -229,10 +262,6 @@ setTimeout(()=>{
       toggleBtn.classList.toggle('is-closed');
       sidebar.classList.toggle('is-closed');
     }
-
-
-
-
 
   }
   newZoom(lon:any,lat:any){
@@ -315,65 +344,6 @@ setTimeout(()=>{
 
   }
 
-
-  }
-
-  multmap(websoc:any,gpsserv:any){
-
-    console.log("calling initmap");
-    var paylod:any
-    var payarr:any = []
-    // var vehicleList = ["0","1"]
-    var listLength:any
-
-
-    console.log("listlength : "+listLength)
-
-
-
-    // setInterval(function refreshIcon(){
-
-
-    //   for(var i=0;i<2;i++){
-    //     // var oldSource = robotarr[i].getSource()
-    //     // var oldFeature = oldSource.getFeatureById(listRoom[i])
-    //     var lon
-    //     var lat
-    //     console.log(payarr[i])
-    //     lon = payarr[i].longitude
-    //     lat = payarr[i].latitude
-
-
-    //     var refFeature = new Feature({
-    //       // geometry : new Point(fromLonLat(MavlinkService.getCoordinate()))
-    //       geometry : new Point(fromLonLat([lon,lat]))
-    //     });
-
-    //     refFeature.setStyle(new Style({
-    //       image : new Icon(({
-    //         src: 'assets/arrow.svg',
-    //         imgSize: [600, 600],
-    //         scale: 0.1,
-    //       }))
-    //     }))
-
-    //     var refSource = new VectorSource({
-    //       features : [refFeature]
-    //     })
-
-    //     // setTimeout(()=>{
-    //     //   console.log("calm down boi")
-
-    //     // },1000)
-
-
-    //     robotarr[i].setSource(refSource)
-    //     console.log("step"+i)
-
-
-    //   }
-
-    // },2000)
 
   }
 

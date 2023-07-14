@@ -38,31 +38,12 @@ const io = require('socket.io')(server, {
     },
 });
 
-function uniqueElm(array) {
-  return array.filter(function(value, index, self) {
-    return self.indexOf(value) === index;
-  });
-}
 
 
 // Make an event connection when client connected
 io.on("connection", (socket) => {
 
-    // socket.on('room',(data) => {
-    //   console.log(data)
-    //   room_ = data
-    //   if(!(room_ in robotlist)){
-    //     robotlist.push(room_)
-    //     robotlist.sort()
-    //     socket.emit('robot-list',robotlist)
-    //   }
 
-    //   socket.room = room_
-    //   socket.join(room_)
-    // })
-
-    // socket.emit('robot-list',robotlist)
-    // Send a message to the client at "hello" event
     socket.emit("hello","world");
 
     // Listen to location data at "location" event from raspberry pi client
@@ -71,14 +52,6 @@ io.on("connection", (socket) => {
        console.log("car id : "+ payload.id)
        carlist.push(payload.id)
        carlist.sort()
-      //   console.log(carlist)
-      //  if(!(payload.id in carlist)){
-      //   carlist.push(payload.id)
-      //   carlist.sort()
-      //   console.log(carlist)
-      //   console.log("new car assigned")
-      //  }
-
       console.log(payload)
       uniquelist = carlist.filter((x,i,a)=>a.indexOf(x)==i)
       console.log(uniquelist)
@@ -90,6 +63,26 @@ io.on("connection", (socket) => {
       io.emit("gps-then",payload)
 
       });
+      socket.on("dellist", payload => {
+
+        index = 0
+        for (i = 0; uniquelist.length; i++) {
+            if (uniquelist[i] == payload) {
+                index = i
+                break;
+            }
+        }
+
+        carlist = carlist.filter(removeRoom);
+
+        function removeRoom(age) {
+            return age != payload;
+        }
+        uniquelist.splice(index, 1);
+        console.log(uniquelist)
+        io.emit('vehicle-list', uniquelist)
+    })
+
 
         // Listen to heading data at "heading" event from raspberry pi client
         socket.on("heading", (data) => {

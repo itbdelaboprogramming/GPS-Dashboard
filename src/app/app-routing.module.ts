@@ -9,13 +9,13 @@ const routes: Routes = [
     component: MapComponent
   },
   {
-    path: 'test',
+    path: 'main',
     component: TestComponent
   },
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '/dashboard'
+    redirectTo: '/main'
   }
 ];
 
