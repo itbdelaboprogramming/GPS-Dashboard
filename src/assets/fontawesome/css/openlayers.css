@@ -1,27 +1,32 @@
-.ol-control,
+.ol-control {
+  background-color: transparent;
+  padding: unset;
+
+}
+
 .ol-control:hover {
-    background-color: transparent !important;
-    padding: unset !important;
+  background-color: transparent;
+  padding: unset;
 }
 
 button {
-    font-size: 16px !important;
-    font-weight: 500 !important;
-    margin: 2px !important;
-    cursor: pointer !important;
-    height: 36px !important;
-    width: 36px !important;
-    color: #0567A6 !important;
-    border-radius: 5px;
-    border: 3px solid #0567A6;
-    background-color: #97E5F4 !important;
-    &:hover{
-        background-color: #60e5c6 !important;
-    }
+  font-size: 30px;
+  font-weight: 500 ;
+  margin: 2px;
+  cursor: pointer;
+  height: 45px;
+  width: 45px;
+  color: #0567A6;
+  border-radius: 5px;
+  border: 3px solid #0567A6;
+  background-color: #97E5F4;
+  /* &:hover{
+        background-color: #60e5c6;
+    } */
 }
 
 button:focus {
-    background-color: #97E5F4 !important;
+  background-color: #97E5F4;
 }
 
 .zoom-control {

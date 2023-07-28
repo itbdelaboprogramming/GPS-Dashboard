@@ -17,6 +17,7 @@ import {Icon,Style} from 'ol/style';
 import Zoom from 'ol/control/Zoom.js';
 import html2canvas from 'html2canvas';
 import { Location } from '@angular/common';
+import { Route, Router } from '@angular/router';
 
 import { Title } from '@angular/platform-browser';
 import { GpsdataService } from '../services/gpsdata.service';
@@ -46,7 +47,7 @@ export class TestComponent implements OnInit {
 
 
 
-  constructor(public webSoc:WebsocketService, public gpsDat:GpsdataService, private location:Location) { }
+  constructor(public webSoc:WebsocketService, public gpsDat:GpsdataService, private location:Location, private route:Router) { }
 
   ngOnInit() {
     this.webSoc.conn()
@@ -133,6 +134,7 @@ setTimeout(()=>{
   refreshPage() {
     this.location.go(this.location.path()); // Navigates to the current route
     window.location.reload(); // Reloads the page
+    // this.route.navigate(['/main'])
   }
 
   deletevehc(id:any){

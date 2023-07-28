@@ -8,6 +8,7 @@ import { MapComponent } from './map/map-component';
 import { TestComponent } from './test/test.component';
 import { HeaderComponent } from './header/header.component';
 import { IpInsertComponent } from './ip-insert/ip-insert.component';
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 
 
 
@@ -24,7 +25,8 @@ import { IpInsertComponent } from './ip-insert/ip-insert.component';
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [
+],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

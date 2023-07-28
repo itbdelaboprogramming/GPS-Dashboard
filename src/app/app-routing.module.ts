@@ -3,6 +3,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { MapComponent } from './map/map-component';
 import { TestComponent } from './test/test.component';
 import { IpInsertComponent } from './ip-insert/ip-insert.component';
+import { LocationStrategy } from '@angular/common';
+import { HashLocationStrategy } from '@angular/common';
 
 const routes: Routes = [
   {
@@ -20,12 +22,18 @@ const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    redirectTo: '/config'
+    redirectTo: '/main'
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  exports: [RouterModule],
+  providers: [
+    {
+      provide: LocationStrategy,
+      useClass: HashLocationStrategy
+    }
+  ]
 })
 export class AppRoutingModule { }

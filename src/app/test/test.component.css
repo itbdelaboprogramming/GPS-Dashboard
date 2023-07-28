@@ -4,7 +4,7 @@
 
 .device-list
 {
-  z-index: 3;
+  z-index: 2;
   position: absolute;
   margin : 30px;
   left: -40vw;
@@ -24,7 +24,7 @@
 
 table {
   font-family: Arial, Helvetica, sans-serif;
-  width: 35vw;
+  width: 37vw;
   height: auto;
   margin: 0 auto;
 }
@@ -41,7 +41,7 @@ td {
 }
 
 th {
-  padding: 5px;
+  padding: 3px;
   width: 30px;
 }
 
@@ -49,6 +49,10 @@ tr:nth-child(even){background-color: #e8f5f4}
 
 tr p, ::placeholder {
   font-size: 12px;
+}
+
+.coordinate {
+ width: 15vw;
 }
 
 .footer {
@@ -68,7 +72,7 @@ img {
 .right-footer {
   float: right;
   margin-right: 20px;
-  margin-top: 40px;
+  margin-top: 30px;
   display: flex;
   flex-direction: column;
   align-items: flex-end;
@@ -90,12 +94,12 @@ li {
 .burger-table {
   margin: 10px;
   margin-left: 30px;
-  margin-top: 32px;
+  margin-top: 30px;
   color:#0567A6;
   position: absolute;
   z-index: 4;
   background-color: #97E5F4;
-  padding: 10px 12px;
+  padding: 12px 15px;
   border-radius: 50%;
   border: 3px solid #0567A6;
   transition: .8s;
@@ -103,7 +107,7 @@ li {
   cursor: pointer;
 
   &.is-closed {
-    transform: translateX(38vw) rotate(45deg);
+    transform: translateX(39vw) rotate(45deg);
   }
 
 }

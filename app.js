@@ -1,4 +1,4 @@
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, protocol} = require('electron')
     const url = require("url");
     const path = require("path");
 
@@ -9,7 +9,9 @@ const {app, BrowserWindow} = require('electron')
         width: 800,
         height: 600,
         webPreferences: {
-          nodeIntegration: true
+          nodeIntegration: true,
+          nodeIntegrationInWorker: true,
+          webSecurity: true,
         }
       })
 
@@ -26,7 +28,27 @@ const {app, BrowserWindow} = require('electron')
       mainWindow.on('closed', function () {
         mainWindow = null
       })
+      mainWindow.webContents.on('did-fail-load', () => mainWindow.loadURL(
+        url.format({
+          pathname: path.join(__dirname, `/dist/olmap/index.html`),
+          protocol: "file:",
+          slashes: true
+        })
+      ));
+
+      // protocol.registerFileProtocol('file', (request, callback) => {
+      //   const filePath = request.url.replace('file:///', '');
+      //   const normalizedPath = path.normalize(`${__dirname}/${filePath}`);
+      //   callback(normalizedPath);
+      // });
+
+      // protocol.interceptFileProtocol('file', (request, callback) => {
+      //   const url = request.url.substr(7); // Remove the 'file://' prefix
+      //   callback({ path: path.normalize(`${__dirname}/${url}`) });
+      // });
+
     }
+
 
     app.on('ready', createWindow)
 
@@ -34,6 +56,12 @@ const {app, BrowserWindow} = require('electron')
       if (process.platform !== 'darwin') app.quit()
     })
 
+    app.on('will-prevent-unload', (event) => {
+      // Handle the event to prevent the default behavior, if necessary
+      event.preventDefault();
+    });
+
     app.on('activate', function () {
       if (mainWindow === null) createWindow()
     })
+

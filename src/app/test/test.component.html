@@ -29,8 +29,8 @@
       <tr>
         <th><p>No.</p></th>
         <th><p>Vehicle Name</p></th>
-        <th><p>Latitude</p></th>
-        <th><p>Longitude</p></th>
+        <th class="coordinate"><p>Latitude</p></th>
+        <th class="coordinate"><p>Longitude</p></th>
         <th><p>Status</p></th>
         <th><p>Focus</p></th>
         <th><p>View</p></th>
@@ -41,66 +41,33 @@
       <tr *ngFor="let vehc of vehicleList; let i = index">
         <td id={{vehc}}><p>{{i+1}}</p></td>
         <td><p>{{payarr[i].vehicleName}}</p></td>
-        <td><p>{{payarr[i].latitude}}</p></td>
-        <td><p>{{payarr[i].longitude}}</p></td>
+        <td class="coordinate"><p>{{payarr[i].latitude}}</p></td>
+        <td class="coordinate"><p>{{payarr[i].longitude}}</p></td>
         <td><p>{{payarr[i].status}}</p></td>
         <td><i style="cursor: pointer; color: #0567A6;" class="fas fa-search-plus" (click)="newZoom(payarr[i].longitude,payarr[i].latitude)"></i></td>
         <td><input (click)="iconVisible()" type="checkbox" id="check{{vehc}}" checked></td>
         <td><i style="cursor: pointer; color: #0567A6;" class="fas fa-times" (click)="deletevehc(vehc)"></i></td>
       </tr>
-      <tr>
-        <!-- <td><p>2</p></td>
-        <td><p>Car B</p></td>
-        <td><p>{{gpsDat.location2.latitude}}</p></td>
-        <td><p>{{gpsDat.location2.longitude}}</p></td>
-        <td><p>Working</p></td>
-        <td><p>Focus</p></td>
-        <td><input type="checkbox"></td>
-      </tr>
-      <tr>
-        <td><p>2</p></td>
-        <td><p>Car B</p></td>
-        <td><p>{{gpsDat.location2.latitude}}</p></td>
-        <td><p>{{gpsDat.location2.longitude}}</p></td>
-        <td><p>Working</p></td>
-        <td><p>Focus</p></td>
-        <td><input type="checkbox"></td>
-      </tr>
-      <tr>
-        <td><p>2</p></td>
-        <td><p>Car B</p></td>
-        <td><p>{{gpsDat.location2.latitude}}</p></td>
-        <td><p>{{gpsDat.location2.longitude}}</p></td>
-        <td><p>Working</p></td>
-        <td><p>Focus</p></td>
-        <td><input type="checkbox"></td>
-      </tr>
-      <tr>
-        <td><p>2</p></td>
-        <td><p>Car B</p></td>
-        <td><p>{{gpsDat.location2.latitude}}</p></td>
-        <td><p>{{gpsDat.location2.longitude}}</p></td>
-        <td><p>Working</p></td>
-        <td><p>Focus</p></td>
-        <td><input type="checkbox"></td>
-      </tr>
-      <tr>
-        <td><p>2</p></td>
-        <td><p>Car B</p></td>
-        <td><p>{{gpsDat.location2.latitude}}</p></td>
-        <td><p>{{gpsDat.location2.longitude}}</p></td>
-        <td><p>Working</p></td>
-        <td><p>Focus</p></td>
-        <td><input type="checkbox"></td>
+
+      <!-- <tr>
+        <td><p>3</p></td>
+        <td><p>Porche</p></td>
+        <td class="coordinate"><p>000.0000000</p></td>
+        <td class="coordinate"><p>888.8888888</p></td>
+        <td><p>Aman bos</p></td>
+        <td><i style="cursor: pointer; color: #0567A6;" class="fas fa-search-plus" ></i></td>
+        <td><input (click)="iconVisible()" type="checkbox"  checked></td>
+        <td><i style="cursor: pointer; color: #0567A6;" class="fas fa-times" ></i></td>
       </tr> -->
+
     </table>
   </div>
 
   <div class="footer">
 
-    <img style="float:left;" class="compass-icon" src="../../assets/compass.svg" />
+    <img style="float:left;" class="compass-icon" src="assets/compass.svg" />
     <div class="right-footer">
-      <li style="width: fit-content;"><i (click)="captureScreenshot()" style="color:#0567A6; cursor: pointer; font-size: 3vh;" class="fas fa-camera"></i></li>
+      <li style="width: fit-content;"><i (click)="captureScreenshot()" style="color:#0567A6; cursor: pointer; font-size: 5vh;" class="fas fa-camera"></i></li>
       <li>&#169; 2023 ITBdeLabo</li>
 
 
