@@ -29,7 +29,7 @@ For Python GPS Backend:
 1. Make sure Socket IO connect to the Node JS Server. Check the server address if it is already matches with the IP Address of Node JS Server device running.
    Check the following code:
 ```bash
-sio.connect("http://<IP-address-or-localhost>:3000
+sio.connect("http://<IP-address-or-localhost>:3000)
 ```
 3. Make sure the port of GPS module is correct.
    Check port address:
