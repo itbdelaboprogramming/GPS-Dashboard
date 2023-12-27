@@ -24,6 +24,10 @@ npm i socket.io
 ```bash
 npm install express
 ```
+3. Install cors
+```bash
+npm i cors
+```
 
 For Python GPS Backend:
 1. Make sure Socket IO connect to the Node JS Server. Check the server address if it is already matches with the IP Address of Node JS Server device running.
