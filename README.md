@@ -24,7 +24,7 @@ npm i socket.io
 ```bash
 npm install express
 ```
-3. Install cors
+4. Install cors
 ```bash
 npm i cors
 ```
