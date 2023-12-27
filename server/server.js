@@ -1,16 +1,11 @@
 // PACKAGE IMPORT
 const express = require("express");
-const createError = require("http-errors");
-const morgan = require("morgan")
 const cors = require("cors")
-const dotenv = require("dotenv");
-
 
 const app = express();
 
 app.use(express.json());
-// Morgan Package untuk melihat request yang masuk
-app.use(morgan('dev'))
+
     // CORS
 app.use(cors())
 app.all('/', function(req, res, next) {
