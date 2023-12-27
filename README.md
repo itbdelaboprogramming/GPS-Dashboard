@@ -1,42 +1,56 @@
-## Installation 
+# How it works
+This system comprises a Dashboard App, Node JS Server, and Python GPS Backend.
+This repository assumes you already have the Python GPS Backend Code, which will run on a single-board computer (e.g. Raspberry Pi) that is interfaced with GPS module.
+On the other hand, the Dashboard App and Node JS Server must run on the same device but can be separated from the Python code. The data communication is done with Socket IO (https://socket.io/).
+The Node JS Server will act as Socket IO server that handles other clients: the Dashboard App and the Python Backend Code. Adjust Socket IO connection from Python Backend Code to Node JS Server because there will be a case in which the two of them will be running on different devices. This can be done by changing the IP Address of the Node JS Server device on the Python Backend Code.
 
-1. Install Node js and NPM from browser 
+Download packaged Dashboard App here: https://ncjpn01.sharepoint.com/:u:/r/sites/ITBdeLabo/Shared%20Documents/MSD700-ITB/MSD700%20GPS/GPS-Dashboard%20App/GPS-Dashboard-Forklift.zip?csf=1&web=1&e=Cx13p7
+
+## Installation 
+For Dashboard App and Node JS Server device:
+
+1. Install Node js and NPM (use latest stable version) 
 [Download Node js](https://nodejs.org/en/).
 check node js and npm version :
 ```bash
 node -v
 npm -v
 ```
-2. install Angular cli
-```bash
-npm i @angular/cli
-```
-3. install Socket IO library
+2. Install Socket IO library
 ```bash
 npm i socket.io
 ```
-4. install openlayers library
-```bash
-npm i ol
-```
-5. install express
+3. Install express
 ```bash
 npm install express
 ```
 
-## Running Program 
-if the server running websocket is in the same device as the angular app then we need two terminal to run the program (one to run node server and the other for running the frontend angular) 
+For Python GPS Backend:
+1. Make sure Socket IO connect to the Node JS Server. Check the server address if it is already matches with the IP Address of Node JS Server device running.
+   Check the following code:
+```bash
+sio.connect("http://<IP-address-or-localhost>:3000
+```
+3. Make sure the port of GPS module is correct.
+   Check port address:
+```bash
+ls -l /dev/tty*
+```
+5. Make sure the GPS data emitter point to the correct "gps" event.
+   Check the following code:
+```bash
+sio.emit("gps",payload)
+```
+
+## Running the App
 
 1. Running Node to start the server
 make sure the directory is on ../server 
 ```bash
 node server.js
 ```
-**Note: this is done if the server running websocket is in the same device as the angular app, skip this if the server is already running on other device
 
-2. Running Angular 
-make sure the directory is on ../
-```bash
-ng serve
-```
-**Note: to make sure the websocket connection established please turn off the firewall on your computer
+2. Make sure the Python GPS Backend already running. You can check if the data already passed from it in the Node JS Server terminal.
+
+3. Running the App 
+just launch the application file from the downloaded app folder
