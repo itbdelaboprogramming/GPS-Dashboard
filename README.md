@@ -35,12 +35,12 @@ For Python GPS Backend:
 ```bash
 sio.connect("http://<IP-address-or-localhost>:3000)
 ```
-3. Make sure the port of GPS module is correct.
+2. Make sure the port of GPS module is correct.
    Check port address:
 ```bash
 ls -l /dev/tty*
 ```
-5. Make sure the GPS data emitter point to the correct "gps" event.
+3. Make sure the GPS data emitter point to the correct "gps" event.
    Check the following code:
 ```bash
 sio.emit("gps",payload)
